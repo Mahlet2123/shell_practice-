@@ -2,30 +2,24 @@
 
 int main()
 {
-	/*char *av[] = {"/bin/ls", "-l", "/tmp", NULL};*/
+	char *av[] = {"/bin/ls", "-l", "/tmp", NULL};
+	int i;
 
-	int id, id1;
-
-	id = fork();
-
-	while (id == 0)
+	for(i = 0; i < 5; i++)
 	{
-		id1 = fork();
+		if(fork() == 0)
+		{
+			printf("[c]pid %d from [p]pid %d\n",getpid(),getppid());
+			
+			if (execve(av[0], av, NULL) == -1)
+				perror("Error:");
+			exit(0);
+		}
 	}
-	
-/**
-*	for (i = 0; i < (n - 2) && i >= 0; i++)
-*	{
-*		id[i] = fork();
-*		if (id[i] == 0)
-*			id[i + 1] = fork();
-*	}
-*/
-	printf("HI THERE\n");
-/**	if (execve(av[0], av, NULL) == -1)
-*		perror("Error:");
-*	while (x != -1 || errno != ECHILD)
-*		printf("waited all the childeren");
-*/
+	while (wait(NULL) != -1 || errno != ECHILD)
+	{
+		printf("waited for a chiled to finish\n");
+	}
+
 	return (0);
 }

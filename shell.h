@@ -6,5 +6,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <errno.h>
+#include <stdlib.h>
 
+char * _read_line(void);
+char *_parse(char *str, char *delim);
 #endif
