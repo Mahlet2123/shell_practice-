@@ -4,7 +4,7 @@
 
 char **_parse(char *str)
 {
-	char *delim = " ";
+	char *delim = "\n ";
 	char *token;
 	int size = 32; position = 0;
 	char **tokens = malloc((int)size * sizeof(char*));

@@ -2,11 +2,9 @@
 
 int main(int ac, char **av)
 {
-	char *delim[] = {"\n", "\t", " "};
-	char *str;
 	char *buffer = NULL;
 	size_t bufsize;
-	int status;
+
 
 	while (1)	
 	{
@@ -21,22 +19,24 @@ int main(int ac, char **av)
 				exit(0);
 			}
 		}
-		str = strtok(buffer, *delim);
-		av[0] = str;
-		av[1] = NULL;
+		/**str = strtok(buffer, *delim);
+		*av[0] = str;
+		*av[1] = NULL;
+		*/
+		av = _parse(buffer);
 			
 		if(fork() == 0)
 		{
 			if (execve(av[0], av, NULL) == -1)
 			{
-				perror("Error:");
+				perror("./shell");
 				exit(0);
 			}
 			exit(EXIT_FAILURE);
 		}
 		else
 		{
-			wait(&status);
+			wait(NULL);
 		}
 		free(buffer);
 		buffer = NULL;
