@@ -2,16 +2,14 @@
 
 int main()
 {
-	char *av[] = {"/bin/ls", "-l", "/tmp", NULL};
+	char *av[] = {"fork", NULL};
 	int i;
 
 	for(i = 0; i < 5; i++)
 	{
 		if(fork() == 0)
 		{
-			printf("[c]pid %d from [p]pid %d\n",getpid(),getppid());
-			
-			if (execve(av[0], av, NULL) == -1)
+			printf("[c]pid %d from [p]pid %d\n",getpid(),getppid());			if (execve(av[0], av, NULL) == -1)
 				perror("Error:");
 			exit(0);
 		}
