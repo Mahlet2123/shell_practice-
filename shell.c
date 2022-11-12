@@ -45,7 +45,7 @@ int main(int ac, char **av)
 			wait(NULL);
 		}
 		free(buffer);
-		free(tokens)
+		free(tokens);
 		buffer = NULL;
 	}	
 	return (0);
